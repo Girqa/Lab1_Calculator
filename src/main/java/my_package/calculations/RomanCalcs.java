@@ -94,4 +94,19 @@ public class RomanCalcs extends Calculations implements Handler {
         }
         throw new IllegalArgumentException("Неверный формат чисел");
     }
+
+    public String intToRoman(int num) {
+        String result = "";
+
+        String[] symbols = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] nums = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+
+        for (int i = 0; i < symbols.length && num > 0; i++) {
+            while (num >= nums[i]) {
+                result += symbols[i];
+                num -= nums[i];
+            }
+        }
+        return result;
+    }
 }

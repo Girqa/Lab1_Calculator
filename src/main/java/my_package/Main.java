@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         String row = reader.nextLine();
+        int result;
 
         try {
             if (NumberIdentifier.isArabicNumber(row)) {
@@ -18,7 +19,8 @@ public class Main {
             }
             else if (NumberIdentifier.isRomanNumber(row)) {
                 RomanCalcs calcs = new RomanCalcs(row);
-                System.out.println(calcs.calculate());
+                result = calcs.calculate();
+                System.out.println(calcs.intToRoman(result));
             }
             else {
                 System.out.println("Неверный формат чисел");
