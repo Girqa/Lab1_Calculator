@@ -89,7 +89,7 @@ public class RomanCalcs extends Calculations implements Handler {
                 return 8;
             case "IX":
                 return 9;
-            case "XI":
+            case "X":
                 return 10;
         }
         throw new IllegalArgumentException("Неверный формат чисел");
