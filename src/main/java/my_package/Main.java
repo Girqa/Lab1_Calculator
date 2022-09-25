@@ -18,6 +18,7 @@ public class Main {
             }
             else if (NumberIdentifier.isRomanNumber(row)) {
                 RomanCalcs calcs = new RomanCalcs(row);
+                System.out.println(calcs.calculate());
             }
             else {
                 System.out.println("Неверный формат чисел");
