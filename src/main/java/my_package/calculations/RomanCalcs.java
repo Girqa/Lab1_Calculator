@@ -1,6 +1,7 @@
 package my_package.calculations;
 
 import my_package.interfaces.Handler;
+import my_package.interfaces.Operation;
 import my_package.operations.Add;
 import my_package.operations.Div;
 import my_package.operations.Mul;
@@ -18,6 +19,7 @@ public class RomanCalcs extends Calculations implements Handler {
         num2 = translateStrNumToInt(numbers[1]);
     }
 
+    @Override
     public int calculate(){
         int result = switch (sign){
             case '+' -> addition(num1, num2);
@@ -34,27 +36,35 @@ public class RomanCalcs extends Calculations implements Handler {
 
     @Override
     public int addition(int a, int b) {
-        return Add.execute(a, b);
+        Operation add = new Add();
+        return add.execute(a, b);
     }
 
     @Override
     public int subtraction(int a, int b) {
-        return Sub.execute(a, b);
+        Operation sub = new Sub();
+        return sub.execute(a, b);
     }
 
     @Override
     public int multiplication(int a, int b) {
-        return Mul.execute(a, b);
+        Operation mul = new Mul();
+        return mul.execute(a, b);
     }
 
     @Override
     public int division(int a, int b) {
-        return Div.execute(a, b);
+        Operation div = new Div();
+        return div.execute(a, b);
     }
 
     @Override
     public String[] handleNumbers(String row) {
-        return row.split(signs);
+        String[] nums = row.split(signs);
+        for (int i=0; i<nums.length; i++){
+            nums[i] = nums[i].replace(" ", "");
+        }
+        return nums;
     }
 
     @Override
@@ -65,7 +75,7 @@ public class RomanCalcs extends Calculations implements Handler {
                 return curSign;
             }
         }
-        throw new IllegalArgumentException("Некорректная операция");
+        throw new IllegalArgumentException("Знак операции не найден.");
     }
 
     @Override
@@ -92,7 +102,7 @@ public class RomanCalcs extends Calculations implements Handler {
             case "X":
                 return 10;
         }
-        throw new IllegalArgumentException("Неверный формат чисел");
+        throw new IllegalArgumentException("Число не найдено. Проверьте формат входных чисел.");
     }
 
     public String intToRoman(int num) {
